@@ -1,7 +1,5 @@
 import pandas as pd
-import matplotlib.pyplot as plt
 import openpyxl
-import os
 from datetime import datetime
 
 # Import data frames using Pandas
@@ -32,6 +30,7 @@ def dt_convert_1(s2c):
     s2c = datetime.strptime(s, '%B %d, %Y at %I:%M%p')
     return s2c
 
+
 # Add new column to DF to account for normalized date and normalized time information
 # Use strptime to parse the date string with the following args:: '%B %d, %Y at %I:%M%p'
 # Iterate over all rows in the df_p data frame, extract the string from the 'Date' column
@@ -46,24 +45,8 @@ for i in df_p.iterrows():
     loc = loc + 1
 
 
-# Return Unique Devices
-def unique_devices():
-    devices = df_pd1["Device"].unique()
-    print(devices)
-    return devices
-
-
 # Write a data frame to a file. file_name expects string value
 def write_excel_file(write_file, file_name):
     write_file.to_excel(file_name + '_xlsout.xlsx', index_label='Index', merge_cells=False)
 
-
-# Summary Statistics
-def summary_stats(request):
-    if request == 'Device':
-        print("Presence count by device type:")
-        presence_count = df_p.groupby('Device')['Presence'].value_counts()
-        print(presence_count)
-
-
-write_excel_file(df_p, 'test_output')
+# write_excel_file(df_p, 'test_output')
